@@ -1,0 +1,68 @@
+
+input {padding: 0; margin: 0; border: 0; width: 100%;  background-color:rgb(163,190,243);
+}
+td {margin: 0; padding: 0;}
+.colProd
+{
+  width:50px;
+}
+.colProd2
+{
+  padding: 5px;
+}
+
+.colProdBon
+{
+  background-color:rgb(163,190,243);
+}
+
+
+.columnaId
+{
+  width:40px;
+}
+
+.columnaNombre
+{
+  width:100px;
+}
+
+.columnaDireccion
+{
+  width:150px;
+}
+
+.columnaVisitado
+{
+  width:30px;
+}
+
+
+.columnaBonificados
+{
+background-color:rgb(163,190,243);
+}
+
+.columnaAlquiler
+{
+background-color: rgb(50,50,100);
+}
+
+.columnaOC
+{
+background-color: rgb(150,50,50);
+}
+
+.fuenteTabla
+{
+  font-size: 17px;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}

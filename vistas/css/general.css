@@ -1,0 +1,62 @@
+*{box-sizing: border-box;}
+
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+  }
+
+/* Clear floats after the columns */
+.row:after{
+    display: table;
+    clear: both;
+}
+
+.fuente
+{
+font-family: "Segoe Print";
+font-size: 17px;
+}
+
+.colorFuente
+{
+color:white;
+}
+
+.borde
+{
+border-style: solid;
+border-width: 1px;
+border-collapse: collapse;
+}
+
+p,div,button
+{
+/*font-family: "Segoe Print";*/
+font-size: 17px;
+color:white;
+}
+
+.titulo{
+color:rgb(153, 214, 255);
+text-shadow: 0px -1px 0px #424242;
+font-size: 50px;
+font-family: 'Unna', serif;
+}
+
+.subtitulo{
+color:rgb(153, 214, 255);
+text-shadow: 0px -1px 0px #424242;
+font-size: 25px;
+}
+
+
+.buttonLink{
+color:rgb(153, 214, 255);
+font-size: 25px;
+}
+
+body
+{
+background: linear-gradient(to bottom, #000066 0%, #0099cc 100%);
+}
