@@ -33,6 +33,8 @@ return $aux;
 }
 
 
+
+
 function tieneAlquiler($idCliente,$fecha)
 {
 
