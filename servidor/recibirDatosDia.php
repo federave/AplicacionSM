@@ -7,7 +7,7 @@ $idRepartidor = $_POST["idRepartidor"];
 $fecha = $_POST["fecha"];
 
 
-$datos = new SimpleXMLElement($_POST["datos"]);
+//$datos = new SimpleXMLElement($_POST["datos"]);
 
 
 /////////////////////////////////////////////////////////////////////
@@ -19,29 +19,8 @@ if($conector->abrirConexion())
   {
   $conexion = $conector->getConexion();
 
-  $dineroPlanilla =
-  $numeroCargas =
-  $dineroGastos =
-  $numeroGastos =
 
-
-  $descripcion="";
-  if(count($gasto->xpath("Combustible")) > 0 )
-    {
-    $combustible = $gasto->Combustible;
-    $descripcion = $gasto->Descripcion;
-    $otros=0;
-    }
-  else
-    {
-    $otros = $gasto->Otros;
-    $descripcion = $gasto->Descripcion;
-    $combustible=0;
-    }
-  $dinero = $gasto->Dinero;
-
-
-  $sql = "INSERT INTO Gastos_Repartidor (IdEmpleado,Fecha,Combustible,Otros,Descripcion,DineroGastado)VALUES('$idRepartidor','$fecha','$combustible','$otros','$descripcion','$dinero')";
+  $sql = "UPDATE DiaRepartidor SET Estado_Planilla_Completada=1 WHERE IdEmpleado = '$idRepartidor' AND Fecha='$fecha'";
   $aux &= $conexion->query($sql);
 
 
