@@ -1,4 +1,7 @@
 <?php
+
+include_once('../modelo/conector.php');
+
 function redirect($url, $statusCode = 303)
 {
 header('Location: ' . $url, true, $statusCode);
@@ -13,6 +16,19 @@ function boolToString($valor)
     return "false";
 }
 
+
+
+function escribir($texto)
+{
+$conector = new Conector();
+if($conector->abrirConexion())
+  {
+  $conexion = $conector->getConexion();
+  $sql = "INSERT INTO Debug(debug)VALUES('$texto')";
+  $conexion->query($sql);
+  $conector->cerrarConexion();
+  }
+}
 
 
 class Xml

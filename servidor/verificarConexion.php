@@ -4,6 +4,7 @@ $xml = new Xml();
 $xml->startTag("Dato");
 $xml->addTag("Estado","true");
 $xml->closeTag("Dato");
+
 /*
 include_once('../modelo/conector.php');
 
