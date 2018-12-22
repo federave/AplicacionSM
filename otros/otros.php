@@ -1,6 +1,6 @@
 <?php
 
-include_once('../modelo/conector.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/conector.php');
 
 function redirect($url, $statusCode = 303)
 {
