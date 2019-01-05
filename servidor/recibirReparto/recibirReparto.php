@@ -237,10 +237,39 @@ if($conector->abrirConexion())
   $packBotellas2L = $packBotellas2LVendidos + $packBotellas2LDeudados;
   $packBotellas500mL = $packBotellas500mLVendidos + $packBotellas500mLDeudados;
 
-  $sql = "UPDATE PlanillaDinamica SET Estado_ClienteAtendido='$visitado',NBidon20L='$bidones20L',NBidon12L='$bidones12L',NBidon10L='$bidones10L',NBidon8L='$bidones8L',NBidon5L='$bidones5L',NPackBotellas2L='$packBotellas2L',NPackBotellas500mL='$packBotellas500mL',NBidon20L_B='$bidones20LBonificados',NBidon12L_B='$bidones12LBonificados',NBidon10L_B='$bidones10LBonificados',NBidon8L_B='$bidones8LBonificados',NBidon5L_B='$bidones5LBonificados',NPackBotellas2L_B='$packBotellas2LBonificados',NPackBotellas500mL_B='$packBotellas500mLBonificados',NBidon20L_A='$bidones20LAlquiler',NBidon12L_A='$bidones12LAlquiler',NBidon20L_V='$bidones20LVacios',NBidon12L_V='$bidones12LVacios',DineroProductos='$dinero' WHERE IdEmpleado = '$idRepartidor' AND IdCliente = '$idCliente'  AND IdDireccion = '$idDireccion' AND  Fecha = '$fecha'";
 
-  $aux &= $conexion->query($sql);
+  $sql = "SELECT * FROM PlanillaDinamica WHERE IdEmpleado = '$idRepartidor' AND IdCliente = '$idCliente'  AND IdDireccion = '$idDireccion' AND  Fecha = '$fecha'";
+  $tabla = $conexion->query($sql);
 
+  if($tabla->num_rows>0)
+    {
+    $sql = "UPDATE PlanillaDinamica SET Estado_ClienteAtendido='$visitado',NBidon20L='$bidones20L',NBidon12L='$bidones12L',NBidon10L='$bidones10L',NBidon8L='$bidones8L',NBidon5L='$bidones5L',NPackBotellas2L='$packBotellas2L',NPackBotellas500mL='$packBotellas500mL',NBidon20L_B='$bidones20LBonificados',NBidon12L_B='$bidones12LBonificados',NBidon10L_B='$bidones10LBonificados',NBidon8L_B='$bidones8LBonificados',NBidon5L_B='$bidones5LBonificados',NPackBotellas2L_B='$packBotellas2LBonificados',NPackBotellas500mL_B='$packBotellas500mLBonificados',NBidon20L_A='$bidones20LAlquiler',NBidon12L_A='$bidones12LAlquiler',NBidon20L_V='$bidones20LVacios',NBidon12L_V='$bidones12LVacios',DineroProductos='$dinero' WHERE IdEmpleado = '$idRepartidor' AND IdCliente = '$idCliente'  AND IdDireccion = '$idDireccion' AND  Fecha = '$fecha'";
+    $aux &= $conexion->query($sql);
+    }
+  else
+    {
+    $sql = "INSERT INTO ClientesFueraDeRecorrido (IdCliente,IdDireccion,IdEmpleado,Fecha,IdFueraDeRecorrido,Mensaje)VALUES('$idCliente','$idDireccion','$idRepartidor','$fecha','1','')";
+    $aux = $conexion->query($sql);
+
+    $sql = "SELECT COUNT(IdCliente) FROM PlanillaDinamica WHERE Fecha='$fecha' AND IdEmpleado='$idRepartidor'";
+    $tabla = $conexion->query($sql);
+    $row = $tabla->fetch_assoc();
+
+    $orden = $row["COUNT(IdCliente)"];
+
+    $sql = "SELECT IdEmpleado FROM Clientes WHERE IdCliente='$idCliente'";
+    $tabla = $conexion->query($sql);
+
+    $row = $tabla->fetch_assoc();
+    $idEmpleadoVendedor = $row["IdEmpleado"];
+
+    if($idEmpleadoVendedor==$idEmpleado)
+      $idEmpleadoVendedor=-1;
+
+    $sql = "INSERT INTO PlanillaDinamica (IdCliente,IdDireccion,IdEmpleado,IdEmpleado_Vendedor,Fecha,Orden,Estado_ClienteAtendido,NBidon20L,NBidon12L,NBidon10L,NBidon8L,NBidon5L,NPackBotellas2L,NPackBotellas500mL,NBidon20L_B,NBidon12L_B,NBidon10L_B,NBidon8L_B,NBidon5L_B,NPackBotellas2L_B,NPackBotellas500mL_B,NBidon20L_V,NBidon12L_V,NBidon20L_O,NBidon12L_O,NBidon10L_O,NBidon8L_O,NBidon5L_O,NPackBotellas2L_O,NPackBotellas500mL_O,NBidon20L_A,NBidon12L_A,DineroProductos,Estado_CPF,Estado_CPD_Auxiliar,Estado_CExtra,Estado_CVendeor)VALUES('$idCliente','$idDireccion','$idRepartidor','$idEmpleadoVendedor','$fecha','$orden',1,'$bidones20L','$bidones12L','$bidones10L','$bidones8L','$bidones5L','$packBotellas2L','$packBotellas500mL','$bidones20LBonificados','$bidones12LBonificados','$bidones10LBonificados','$bidones8LBonificados','$bidones5LBonificados','$packBotellas2LBonificados','$packBotellas500mLBonificados','$bidones20LVacios','$bidones12LVacios',0,0,0,0,0,0,0,'$bidones20LAlquiler','$bidones12LAlquiler','$dinero',0,0,1,0)";
+    $aux = $conexion->query($sql);
+
+    }
 
 
 

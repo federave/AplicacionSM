@@ -33,6 +33,23 @@ if($conector->abrirConexion())
   $sql = "INSERT INTO Cargas (IdEmpleado,Fecha,NBidon20L,NBidon12L,NBidon10L,NBidon8L,NBidon5L,NPackBotellas2L,NPackBotellas500mL,NDispFC,NDispNat)VALUES('$idRepartidor','$fecha','$bidones20L','$bidones12L','$bidones10L','$bidones8L','$bidones5L','$packBotellas2L','$packBotellas500mL','$cero','$cero')";
   $aux &= $conexion->query($sql);
 
+
+  $sql = "SELECT Numero_Cargas FROM DiaRepartidor WHERE IdEmpleado='$idRepartidor' AND Fecha='$fecha'";
+  $tabla = $conexion->query($sql);
+
+  if($tabla->num_rows>0)
+      {
+      $row = $tabla->fetch_assoc();
+      $numero = $row["Numero_Cargas"];
+      $numero++;
+
+      $sql = "UPDATE DiaRepartidor SET Numero_Cargas='$numero' WHERE IdEmpleado='$idRepartidor' AND Fecha='$fecha'";
+      $aux &= $conexion->query($sql);
+
+      }
+
+
+
   $conector->cerrarConexion();
   }
 else

@@ -20,6 +20,9 @@ if($conector->abrirConexion())
   $sql = "DELETE FROM Cargas WHERE IdEmpleado='$idRepartidor' AND Fecha='$fecha'";
   $aux &= $conexion->query($sql);
 
+  $sql = "UPDATE DiaRepartidor SET Numero_Cargas=0 WHERE IdEmpleado='$idRepartidor' AND Fecha='$fecha'";
+  $aux &= $conexion->query($sql);
+
   $conector->cerrarConexion();
   }
 else

@@ -34,6 +34,10 @@ if($conector->abrirConexion())
   $sql = "INSERT INTO Descargas (IdEmpleado,Fecha,NBidon20L,NBidon12L,NBidon10L,NBidon8L,NBidon5L,NPackBotellas2L,NPackBotellas500mL,NBidon20L_V,NBidon12L_V,NDispFC,NDispNat)VALUES('$idRepartidor','$fecha','$bidones20L','$bidones12L','$bidones10L','$bidones8L','$bidones5L','$packBotellas2L','$packBotellas500mL',$bidones20LVacios,$bidones12LVacios,'$cero','$cero')";
   $aux &= $conexion->query($sql);
 
+  
+
+
+
   $conector->cerrarConexion();
   }
 else
