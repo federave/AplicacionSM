@@ -62,7 +62,6 @@ include_once('../../modelo/trabajadores/vendedores.php');
                     <div style="margin:auto;width:80%">
                       <select class="form-control" id="idVendedor" name="idVendedor" style="width:100%;font-size:19px">
                         <?php
-
                         $vendedores = new Vendedores();
                         $k=0;
                         while($k<$vendedores->getNumeroVendedores())

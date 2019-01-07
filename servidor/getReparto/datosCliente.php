@@ -253,6 +253,8 @@ if($conector->abrirConexion())
       }
   $xml->closeTag("Direccion");
 
+  preciosProductos($xml,$idCliente,$fecha);
+
 
   $sql = "SELECT * FROM Clientes WHERE IdCliente = '$idCliente'";
   $tabla = $conexion->query($sql);
