@@ -9,6 +9,8 @@ function datosActualidadCliente(&$xml,$idCliente,$idDireccion,$fecha)
 $alquiler = datosActualidadAlquiler($xml,$idCliente,$fecha);
 datosInactividad($xml,$idCliente,$idDireccion,$fecha,$alquiler);
 datosActualidadBidonesDispenserFC($xml,$idCliente,$fecha);
+preciosProductos($xml,$idCliente,$fecha);
+
 }
 
 

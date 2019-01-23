@@ -112,7 +112,7 @@ if($conector->abrirConexion())
         }
       elseif($row["Estado_AcuerdoDispenser"]==0 && $row["Estado_AcuerdoComercio"]==1)
         {
-        $sql = "SELECT * FROM AcuerdosComercio WHERE IdCliente = '$idCliente' AND Fecha<='$fecha' ORDER BY Fecha DESC";
+        $sql = "SELECT * FROM AcuerdosComercio WHERE IdCliente = '$idCliente' AND DATE(Fecha)<='$fecha' ORDER BY Fecha DESC";
         $tablaAC = $conexion->query($sql);
         if($tablaAC->num_rows>0)
           {
