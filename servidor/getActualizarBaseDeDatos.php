@@ -28,6 +28,7 @@ while($k <   $repartidores->getNumeroRepartidores())
     $k++;
     }
 $xml->closeTag("Repartidores");
+escribir($xml->toString());
 }
 
 
@@ -49,6 +50,8 @@ while($k <  $vendedores->getNumeroVendedores())
     $k++;
     }
 $xml->closeTag("Vendedores");
+escribir($xml->toString());
+
 }
 
 function agregarTipoClientes(&$xml)
