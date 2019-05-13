@@ -182,6 +182,33 @@ return $alquiler;
 }
 
 
+//// No se usa tieneAlquiler()
+
+function tieneAlquiler($idCliente,$fecha)
+{
+
+$aux=false;
+$conector = new Conector();
+
+if($conector->abrirConexion())
+  {
+  $conexion = $conector->getConexion();
+
+  $date = strtotime($fecha);
+  $year = date("Y", $date);
+  $mes = date("m", $date);
+
+  $sql = "SELECT * FROM AlquilerDispenser_BidonesEntregados WHERE IdCliente = '$idCliente' AND Mes = '$mes' AND Año = '$year'";
+  $tablaAD = $conexion->query($sql);
+  if($tablaAD->num_rows>0)
+      {
+      $aux=true;
+      }
+  $conector->cerrarConexion();
+  }
+
+return $aux;
+}
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -217,12 +244,8 @@ if($conector->abrirConexion())
   $date = new DateTime($fecha);
   $fechaAux = $date->sub(new DateInterval('P30D'));
   $fechaAux = $fechaAux->format('Y-m-d H:i:s');
-/*
-  escribir("Comienzo Inactividad");
-  escribir($fechaAux);
-  escribir("Fin Inactividad");
-*/
-  $sql = "SELECT NBidon20L_A,NBidon12L_A,NBidon20L,NBidon12L,NBidon10L,NBidon8L,NBidon5L,NPackBotellas2L,NPackBotellas500mL FROM PlanillaDinamica WHERE IdCliente = '$idCliente' AND Fecha >= '$fechaAux' AND Fecha < '$fecha' AND Estado_ClienteAtendido = 1
+
+  $sql = "SELECT Fecha,NBidon20L_A,NBidon12L_A,NBidon20L,NBidon12L,NBidon10L,NBidon8L,NBidon5L,NPackBotellas2L,NPackBotellas500mL FROM PlanillaDinamica WHERE IdCliente = '$idCliente' AND Fecha BETWEEN '$fechaAux' AND '$fecha'
   AND (NBidon20L>0 OR NBidon12L>0 OR NBidon20L_A>0 OR NBidon12L_A>0 OR NBidon10L>0 OR NBidon8L>0 OR NBidon5L>0 OR NPackBotellas2L>0 OR NPackBotellas500mL>0)
   ORDER BY Fecha DESC";
 
