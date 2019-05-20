@@ -7,6 +7,7 @@ include_once('alquileres.php');
 include_once('bidonesCliente.php');
 include_once('deudaProductos.php');
 include_once('observaciones.php');
+include_once('dispensadores.php');
 
 
 $idRepartidor = $_POST["idRepartidor"];
@@ -30,6 +31,30 @@ $aux&=eliminarDatosAlquiler($idCliente,$idDireccion,$idRepartidor,$fecha);
 $aux&=eliminarDatosBidonesCliente($idCliente,$idDireccion,$idRepartidor,$fecha);
 
 $aux&=eliminarObservaciones($idCliente,$idDireccion,$idRepartidor,$fecha);
+
+
+
+escribir("InicioAD");
+escribir($aux);
+
+$aux&=eliminarDispensadores($idCliente,$idDireccion,$idRepartidor,$fecha);
+
+
+/*
+  if(count($reparto->xpath("VentaVertedores"))> 0)
+    {
+    $cantidad=$reparto->VentaVertedores->Cantidad;
+    escribir($cantidad);
+    }
+*/
+
+escribir($aux);
+
+
+ $aux&=actualizarDispensadores($reparto,$idCliente,$idDireccion,$idRepartidor,$fecha);
+ escribir($aux);
+
+escribir("FinAD");
 
 
 

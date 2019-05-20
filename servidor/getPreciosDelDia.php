@@ -10,8 +10,13 @@ function precios(&$xml,$fecha)
 $precioAlquileres = new PrecioAlquileres($fecha);
 $precioRetornables = new PrecioRetornables($fecha);
 $precioDescartables = new PrecioDescartables($fecha);
+$precioDispensadores = new PrecioDispensadores($fecha);
 
 $xml->startTag("Precios");
+  $xml->startTag("PrecioDispensadores");
+    $xml->addTag("Vertedor_Precio",$precioDispensadores->getVertedor());
+    $xml->addTag("Dispenser_Precio",$precioDispensadores->getDispenser());
+  $xml->closeTag("PrecioDispensadores");
   $xml->startTag("PrecioAlquileres");
     $xml->addTag("Alquiler6Bidones_Precio",$precioAlquileres->getAlquiler6Bidones());
     $xml->addTag("Alquiler8Bidones_Precio",$precioAlquileres->getAlquiler8Bidones());

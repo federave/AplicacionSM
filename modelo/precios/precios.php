@@ -4,6 +4,58 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/conector.php');
 
 
 
+class PrecioDispensadores extends Conector
+{
+
+
+      function __construct($fecha=null)
+      {
+      parent::__construct();
+
+      if($fecha!=null)
+        {
+        if(parent::abrirConexion())
+            {
+            $sql = "SELECT * FROM PreciosDispensadores WHERE Fecha <= '$fecha' ORDER BY Fecha DESC ";
+            $tabla = $this->conexion->query($sql);
+
+            if($tabla->num_rows>0)
+                {
+                $row = $tabla->fetch_assoc();
+                $this->vertedor = $row["vertedor"];
+                $this->dispenser = $row["dispenser"];
+                }
+            }
+        }
+
+
+      }
+
+      private $vertedor;
+      private $dispenser;
+
+      public function getVertedor()
+      {
+      return $this->vertedor;
+      }
+      public function getDispenser()
+      {
+      return $this->dispenser;
+      }
+
+      public function setVertedor($precio)
+      {
+      $this->vertedor = $precio;
+      }
+      public function setDispenser($precio)
+      {
+      $this->dispenser = $precio;
+      }
+
+
+
+
+}
 
 class PrecioAlquileres extends Conector
 {
