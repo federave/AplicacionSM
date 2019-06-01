@@ -31,6 +31,10 @@
     <br>
     <p style="font-size:20px">Dinero Pagos Deuda Productos: <?php echo $diaRepartidor->getDineroPagosDeudaProductos(); ?></p>
     <br>
+    <p style="font-size:20px">Dinero Ventas Vertedores: <?php echo $diaRepartidor->getVentasVertedores()->getDinero(); ?></p>
+    <br>
+    <p style="font-size:20px">Dinero Ventas Dispensers: <?php echo $diaRepartidor->getVentasDispensers()->getDinero(); ?></p>
+    <br>
     <p style="font-size:20px">Dinero Gastos: <?php echo $diaRepartidor->getDineroGastos(); ?></p>
     <br>
     <p style="font-size:20px;color:rgb(255, 184, 77)">Dinero a Presentar: <?php echo $diaRepartidor->getDineroAPresentar(); ?></p>

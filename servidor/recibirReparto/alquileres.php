@@ -81,7 +81,7 @@ if($conector->abrirConexion())
 return $aux;
 }
 
-
+/*
 function eliminarDatosAlquiler($idCliente,$idDireccion,$idRepartidor,$fecha)
 {
 
@@ -265,6 +265,9 @@ return $aux;
 
 
 
+*/
+
+
 
 function actualizarDeudaAlquiler($idCliente,$idRepartidor,$fecha)
 {
@@ -345,9 +348,6 @@ return $aux;
 
 
 /////////////////////////////////////////////////////////////////////
-
-
-
 
 
 

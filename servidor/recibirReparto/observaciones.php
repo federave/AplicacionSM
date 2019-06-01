@@ -28,5 +28,32 @@ return $aux;
 
 
 
+function actualizarObservaciones($reparto,$idCliente,$idDireccion,$idRepartidor,$fecha)
+{
+$aux=false;
+$conector = new Conector();
+
+if($conector->abrirConexion())
+  {
+  $conexion = $conector->getConexion();
+  $aux=true;
+
+  /* Observaciones */
+  if(count($reparto->xpath("Observacion")) > 0 )
+    {
+    $observacion = $reparto->Observacion;
+    $sql = "INSERT INTO ObservacionesPlanillaDinamica (IdCliente,IdDireccion,IdEmpleado,Fecha,Observacion)VALUES('$idCliente','$idDireccion','$idRepartidor','$fecha','$observacion')";
+    $aux &= $conexion->query($sql);
+    }
+
+  $conector->cerrarConexion();
+  }
+
+return $aux;
+}
+
+
+
+
 
  ?>

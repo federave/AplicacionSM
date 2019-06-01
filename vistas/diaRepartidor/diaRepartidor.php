@@ -185,6 +185,16 @@ $diaRepartidor = $_SESSION["DiaRepartidor"];
 
       <?php require 'visitas/visitas.php'; ?>
 
+      <!-- Dispensadores -->
+
+      <?php require 'dispensadores/ventasvertedores.php'; ?>
+      <?php require 'dispensadores/cambiosvertedores.php'; ?>
+      <?php require 'dispensadores/entregasvertedores.php'; ?>
+
+      <?php require 'dispensadores/ventasdispensers.php'; ?>
+      <?php require 'dispensadores/cambiosdispensers.php'; ?>
+      <?php require 'dispensadores/entregasdispensers.php'; ?>
+      <?php require 'dispensadores/retirosdispensers.php'; ?>
 
 
 

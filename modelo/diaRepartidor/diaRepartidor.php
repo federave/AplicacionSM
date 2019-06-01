@@ -14,6 +14,13 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/diaRepartidor/rep
 include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/diaRepartidor/adelantoSueldo/adelantoSueldo.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/otros/otros.php');
 
+include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/diaRepartidor/repartos/reparto/dispensadores/ventasvertedores.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/diaRepartidor/repartos/reparto/dispensadores/cambiosvertedores.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/diaRepartidor/repartos/reparto/dispensadores/entregasvertedores.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/diaRepartidor/repartos/reparto/dispensadores/ventasdispensers.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/diaRepartidor/repartos/reparto/dispensadores/cambiosdispensers.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/diaRepartidor/repartos/reparto/dispensadores/entregasdispensers.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/AplicacionSM/modelo/diaRepartidor/repartos/reparto/dispensadores/retirosdispensers.php');
 
 
 class DiaRepartidor extends GenericoDiaRepartidor
@@ -51,6 +58,16 @@ class DiaRepartidor extends GenericoDiaRepartidor
     $this->visitas = new Visitas();
     $this->pagosAlquileres = new PagosAlquileresDiaRepartidor();
 
+    $this->ventasVertedores = new VentasVertedores();
+    $this->cambiosVertedores = new CambiosVertedores();
+    $this->entregasVertedores = new EntregasVertedores();
+    $this->ventasDispensers = new VentasDispensers();
+    $this->cambiosDispensers = new CambiosDispensers();
+    $this->entregasDispensers = new EntregasDispensers();
+    $this->retirosDispensers = new RetirosDispensers();
+
+
+
     }
 
 
@@ -67,6 +84,25 @@ class DiaRepartidor extends GenericoDiaRepartidor
     private $observaciones;
     private $pagosAlquileres;
     private $visitas;
+
+    private $ventasVertedores;
+    private $cambiosVertedores;
+    private $entregasVertedores;
+    private $ventasDispensers;
+    private $cambiosDispensers;
+    private $entregasDispensers;
+    private $retirosDispensers;
+
+    public function getVentasVertedores(){return $this->ventasVertedores;}
+    public function getCambiosVertedores(){return $this->cambiosVertedores;}
+    public function getEntregasVertedores(){return $this->entregasVertedores;}
+    public function getVentasDispensers(){return $this->ventasDispensers;}
+    public function getCambiosDispensers(){return $this->cambiosDispensers;}
+    public function getEntregasDispensers(){return $this->entregasDispensers;}
+    public function getRetirosDispensers(){return $this->retirosDispensers;}
+
+
+
 
 
     public function getVisitas()
@@ -89,10 +125,12 @@ class DiaRepartidor extends GenericoDiaRepartidor
     private $dineroPagos=0;
     private $dineroPagosAlquiler=0;
     private $dineroPagosDeudaProductos=0;
+    private $dineroVentasVertedores=0;
+    private $dineroVentasDispensers=0;
 
     public function getDineroTotalRecaudado()
     {
-    return $this->dineroVentas + $this->dineroPagos;
+    return $this->dineroVentas + $this->dineroPagos + $this->ventasVertedores->getDinero() + $this->ventasDispensers->getDinero();
     }
 
     public function getDineroAPresentar()
@@ -102,6 +140,8 @@ class DiaRepartidor extends GenericoDiaRepartidor
 
     public function getDineroGastos(){return $this->gastos->getDinero();}
     public function getDineroPagos(){return $this->dineroPagos;}
+    public function getDineroVentasVertedores(){return $this->dineroVentasVertedores;}
+    public function getDineroVentasDispensers(){return $this->dineroVentasDispensers;}
 
     public function getDineroVentas(){return $this->dineroVentas;}
     public function getDineroPagosAlquiler(){return $this->dineroPagosAlquiler;}
@@ -198,6 +238,18 @@ class DiaRepartidor extends GenericoDiaRepartidor
 
               $this->observaciones = new ObservacionesClienteDiaRepartidor($idRepartidor,$this->fecha);
 
+              /////DISPENSADORES
+
+              $this->ventasVertedores = new VentasVertedores($idRepartidor,$this->fecha);
+              $this->cambiosVertedores = new CambiosVertedores($idRepartidor,$this->fecha);
+              $this->entregasVertedores = new EntregasVertedores($idRepartidor,$this->fecha);
+
+              $this->ventasDispensers = new VentasDispensers($idRepartidor,$this->fecha);
+              $this->cambiosDispensers = new CambiosDispensers($idRepartidor,$this->fecha);
+              $this->entregasDispensers = new EntregasDispensers($idRepartidor,$this->fecha);
+              $this->retirosDispensers = new RetirosDispensers($idRepartidor,$this->fecha);
+
+
               /////Visitas
 
               $this->visitas = new Visitas($idRepartidor,$this->fecha);
@@ -263,6 +315,10 @@ class DiaRepartidor extends GenericoDiaRepartidor
                   $this->dineroVentas = $rowPD["SUM(DineroProductos)"];
 
                   }
+
+
+
+
 
               /////Clientes Fuera de Recorrido
 
